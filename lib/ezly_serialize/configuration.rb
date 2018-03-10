@@ -6,7 +6,11 @@ module EzlySerialize
       end
 
       def serializer(serializer=nil)
-        @serializer ||= serializer
+        if serializer.nil?
+          @serializer
+        else
+          @serializer = serializer
+        end
       end
     end
   end
