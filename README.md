@@ -1,8 +1,6 @@
 # EzlySerialize
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ezly_serialize`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+EzlySerialize is a very simple gem that allows serialization of objects. It works out of the box with JSON and MessagePack, but can be extended to work with any ser/deserializer that implements the methods ```dump``` and ```load``` in a similar way as JSON.
 
 ## Installation
 
@@ -22,7 +20,52 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Let's assume that you have an object Person that looks like this
+
+```ruby
+class Person
+  def initialize(name)
+    @name = name
+  end
+end
+```
+
+In order to use ```EzlySerialize```, you only need to include the module in the class
+and configure ```EzlySerialize``` to use the serializer of your preference.
+
+```ruby
+class Person
+  include EzlySerialize
+
+  attr_reader :name
+
+  def initialize(name)
+    @name = name
+  end
+end
+
+EzlySerialize::Configuration.serializer(JSON)
+```
+
+That's it! You can now easily serialize your object like that:
+
+```ruby
+me = Person.new('Jason')
+serialized = me.serialize # => {"name": "Jason"}
+```
+
+If you want to hydrate an object from a serialized value, you can use the deserialize
+method:
+
+```ruby
+me = Person.new(nil)
+me.deserialize(serialized)
+puts me.name # => "Jason"
+```
+
+Note: EzlySerialize is not opinionated about deserialization and I've chosen to let the user
+instantiate the object and just hydrate it from a serialized object instead of
+engaging into metaprogramming and setting rules and conventions.
 
 ## Development
 
