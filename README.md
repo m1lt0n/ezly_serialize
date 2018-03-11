@@ -24,6 +24,8 @@ Let's assume that you have an object Person that looks like this
 
 ```ruby
 class Person
+  attr_reader :name
+  
   def initialize(name)
     @name = name
   end
