@@ -1,6 +1,6 @@
 # EzlySerialize
 
-EzlySerialize is a very simple gem that allows serialization of objects. It works out of the box with JSON and MessagePack, but can be extended to work with any ser/deserializer that implements the methods ```dump``` and ```load``` in a similar way as JSON.
+EzlySerialize is a very simple gem that allows serialization of objects. It works out of the box with Marshal, JSON and MessagePack, but can be extended to work with any ser/deserializer that implements the methods ```dump``` and ```load``` in a similar way as JSON.
 
 ## Installation
 
